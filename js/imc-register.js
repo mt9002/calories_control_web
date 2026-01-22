@@ -13,24 +13,41 @@ function init_imc() {
         const altura = parseFloat(alturaSlider.value);
         const peso = parseFloat(pesoSlider.value);
 
-        // Lógica de cálculo del IMC
-        const imc = (peso / ((altura / 100) ** 2)).toFixed(2);
-        let categoria = "";
-        if (imc < 18.5) categoria = "Bajo peso";
-        else if (imc < 25) categoria = "Normal";
-        else if (imc < 30) categoria = "Sobrepeso";
-        else categoria = "Obesidad";
-
-        // Mostrar resultado
         const resultadoDiv = document.getElementById("resultado");
-        resultadoDiv.textContent = `Tu IMC es ${imc} (${categoria})`;
-        resultadoDiv.classList.remove("d-none");
+        const errorDiv = document.getElementById("error");
+        resultadoDiv.classList.add("d-none");
+        errorDiv.classList.add("d-none");
 
-        // Aquí podrías enviar los datos al backend
-        // fetch("/imc/create", { method: "POST", body: JSON.stringify({altura, peso, imc, categoria}) })
+        try {
+            const response = await fetch("/imc/create", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams({ altura, peso })
+            });
 
-        // Actualizar tabla (simulación)
-        addRow({ userName: "Juan Perez", peso, altura: altura / 100, resultado: imc, clasificacion: categoria, fechaRegistro: new Date().toLocaleDateString() });
+            if (!response.ok) throw new Error("Error al calcular IMC");
+
+            const data = await response.json();
+
+            // Mostrar resultado
+            resultadoDiv.textContent = `Tu IMC es ${data.imc} (${data.categoria})`;
+            resultadoDiv.classList.remove("d-none");
+
+            // Actualizar tabla
+            addRow({
+                userName: data.userName || "Usuario",
+                peso: data.peso,
+                altura: data.altura,
+                resultado: data.imc,
+                clasificacion: data.categoria,
+                fechaRegistro: data.fechaRegistro
+            });
+
+        } catch (err) {
+            console.error(err);
+            errorDiv.textContent = "No se pudo calcular el IMC. Intenta de nuevo.";
+            errorDiv.classList.remove("d-none");
+        }
     });
 
     // Tabla e historial
@@ -59,13 +76,13 @@ function init_imc() {
         for (const r of pageRegs) {
             const tr = document.createElement("tr");
             tr.innerHTML = `
-        <td>${r.userName}</td>
-        <td>${r.peso}</td>
-        <td>${r.altura.toFixed(2)}</td>
-        <td>${r.resultado}</td>
-        <td>${r.clasificacion}</td>
-        <td>${r.fechaRegistro}</td>
-      `;
+                <td>${r.userName}</td>
+                <td>${r.peso}</td>
+                <td>${r.altura.toFixed(2)}</td>
+                <td>${r.resultado}</td>
+                <td>${r.clasificacion}</td>
+                <td>${new Date(r.fechaRegistro).toLocaleDateString()}</td>
+            `;
             tableBody.appendChild(tr);
         }
 
@@ -83,6 +100,7 @@ function init_imc() {
     prevBtn.addEventListener("click", () => {
         if (currentPage > 0) { currentPage--; renderTable(); }
     });
+
     nextBtn.addEventListener("click", () => {
         if ((currentPage + 1) * pageSize < registros.length) { currentPage++; renderTable(); }
     });
