@@ -1,8 +1,8 @@
 function init_imcregister(){
     const alturaSlider = document.getElementById("alturaSlider");
     const pesoSlider = document.getElementById("pesoSlider");
-    const alturaValor = document.getElementById("altura-valor");
-    const pesoValor = document.getElementById("peso-valor");
+    const alturaValor = document.getElementById("alturaSlider");
+    const pesoValor = document.getElementById("pesoSlider");
     const form = document.getElementById("imc-form");
     const tableBody = document.getElementById("tabla-imc")?.querySelector("tbody");
     const pageSizeSelect = document.getElementById("pageSize");
