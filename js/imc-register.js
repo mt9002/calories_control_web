@@ -5,9 +5,16 @@ function init_imc() {
     const pesoValor = document.getElementById("peso-valor");
     
     const API_URL = "http://localhost:8080/imc/create";
+     
     
-    alturaSlider.addEventListener("input", () => alturaValor.textContent = alturaSlider.value);
-    pesoSlider.addEventListener("input", () => pesoValor.textContent = pesoSlider.value);
+    // Actualizar badges al mover sliders
+    alturaSlider.addEventListener("input", () => {
+        alturaValor.textContent = alturaSlider.value;
+    });
+
+    pesoSlider.addEventListener("input", () => {
+        pesoValor.textContent = pesoSlider.value;
+    });
 
     const form = document.getElementById("imc-form");
     form.addEventListener("submit", async (e) => {
