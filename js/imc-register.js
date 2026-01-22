@@ -35,7 +35,7 @@ function init_imcregister(){
     // =======================
     // Formulario
     // =======================
-    form.addEventListener("submit", async (e) => {
+   document.getElementById("imcForm").addEventListener("submit", async (e) =>{
         e.preventDefault();
         const altura = parseFloat(alturaSlider.value);
         const peso = parseFloat(pesoSlider.value);
