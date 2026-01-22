@@ -11,7 +11,16 @@ function init_imcregister(){
     const pageInfo = document.getElementById("pagina-info");
     const resultadoDiv = document.getElementById("resultado");
     const errorDiv = document.getElementById("error");
+    
+    if (!alturaSlider || !pesoSlider) return;
 
+    alturaSlider.addEventListener("input", () => {
+        alturaValor.textContent = alturaSlider.value;
+    });
+    pesoSlider.addEventListener("input", () => {
+        pesoValor.textContent = pesoSlider.value;
+    });
+    
     if (!alturaSlider || !pesoSlider || !form || !tableBody) {
         console.warn("init_imc: elementos no encontrados, ¿la vista está cargada?");
         return;
@@ -22,15 +31,6 @@ function init_imcregister(){
     let currentPage = 0;
     let pageSize = parseInt(pageSizeSelect.value);
 
-    // =======================
-    // Sliders
-    // =======================
-    alturaSlider.addEventListener("input", () => {
-        alturaValor.textContent = alturaSlider.value;
-    });
-    pesoSlider.addEventListener("input", () => {
-        pesoValor.textContent = pesoSlider.value;
-    });
 
     // =======================
     // Formulario
