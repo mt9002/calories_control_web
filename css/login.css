@@ -1,0 +1,63 @@
+    body {
+        background: #FFFFFF; /* White */
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Nunito', sans-serif;
+    }
+
+    .login-card {
+        max-width: 400px;
+        width: 100%;
+        border: 1px solid #E6E6FA; /* Light purple */
+        border-radius: 1rem;
+        box-shadow: 0 4px 20px rgba(75, 0, 130, 0.1); /* Dark purple shadow */
+        background-color: #FFFFFF; /* White */
+    }
+
+    .login-header {
+        background-color: #4B0082; /* Dark purple */
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        color: #FFFFFF; /* White */
+    }
+
+    .login-header h2 {
+        margin: 0;
+        padding: 1.5rem;
+        font-weight: bold;
+    }
+
+    .btn-custom {
+        background-color: #9370DB; /* Medium purple */
+        color: #FFFFFF; /* White */
+        border: 1px solid #9370DB;
+    }
+
+    .btn-custom:hover {
+        background-color: #8A2BE2; /* Blue violet */
+        color: #FFFFFF;
+    }
+
+    .form-control:focus {
+        border-color: #4B0082; /* Dark purple */
+        box-shadow: 0 0 0 0.2rem rgba(75, 0, 130, 0.25);
+    }
+
+    /* Override Bootstrap classes for purple and white theme */
+    .text-success {
+        color: #9370DB !important; /* Medium purple */
+    }
+
+    .alert-success {
+        background-color: #E6E6FA; /* Light purple */
+        border-color: #9370DB; /* Medium purple */
+        color: #4B0082; /* Dark purple */
+    }
+
+    .alert-danger {
+        background-color: #E6E6FA; /* Light purple */
+        border-color: #9370DB; /* Medium purple */
+        color: #4B0082; /* Dark purple */
+    }

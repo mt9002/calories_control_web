@@ -1,0 +1,60 @@
+/* Centrar la tarjeta en la pantalla */
+body {
+    background: #FFFFFF; /* White */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+}
+
+/* Estilo para la tarjeta del formulario */
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    background: #FFFFFF; /* White */
+    border: 1px solid #E6E6FA; /* Light purple */
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(75, 0, 130, 0.1); /* Dark purple shadow */
+}
+
+/* Encabezado */
+.login-header {
+    padding: 1.5rem 1rem 0 1rem;
+}
+
+.login-header h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #4B0082; /* Dark purple */
+}
+
+/* Botón personalizado */
+.btn-custom {
+    background-color: #9370DB; /* Medium purple */
+    color: #FFFFFF; /* White */
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.btn-custom:hover {
+    background-color: #8A2BE2; /* Blue violet */
+}
+
+/* Campos redondeados */
+.form-control.rounded-pill {
+    padding: 0.6rem 1rem;
+}
+
+/* Enlaces */
+a {
+    font-size: 0.9rem;
+}
+
+/* Responsive para móviles */
+@media (max-width: 576px) {
+    .login-card {
+        margin: 1rem;
+    }
+}

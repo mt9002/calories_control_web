@@ -1,0 +1,114 @@
+<div class="row g-4 justify-content-center align-items-stretch">
+
+    <!-- Calculadora IMC -->
+    <div class="col-12 col-lg-6">
+        <div class="h-100">
+            <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+                <div class="card-header bg-gradient-primary text-white py-4">
+                    <h4 class="card-title mb-0 d-flex align-items-center text-dark">
+                        <i class="bi bi-calculator me-3 fs-4"></i> Calculadora de IMC
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="mb-4">
+                        <label for="altura-valor" class="form-label fw-semibold d-flex align-items-center">
+                            <i class="bi bi-arrows-expand me-2 text-primary"></i>
+                            Altura (cm): <span id="altura-valor" class="ms-2 badge bg-light">170</span>
+                        </label>
+                        <input type="range" class="form-range custom-range" id="alturaSlider" min="100" max="220"
+                            step="1" value="170">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="peso-valor" class="form-label fw-semibold d-flex align-items-center">
+                            <i class="bi bi-speedometer me-2 text-success"></i>
+                            Peso (kg): <span id="peso-valor" class="ms-2 badge bg-light">67</span>
+                        </label>
+                        <input type="range" class="form-range custom-range" id="pesoSlider" min="30" max="150" step="1"
+                            value="67">
+                    </div>
+
+                    <button id="calcular-btn" class="btn btn-primary w-100 mb-3">Calcular IMC</button>
+
+                    <div id="resultado" class="alert alert-info mt-4 d-none rounded-3 shadow-sm">
+                        <h5 class="alert-heading"><i class="bi bi-info-circle me-2"></i>Resultado</h5>
+                        <p id="resultado-texto"></p>
+                        <hr>
+                        <p class="mb-0" id="resultado-categoria"></p>
+                    </div>
+
+                    <div class="mt-4 p-3 bg-light rounded-3">
+                        <h6 class="text-muted mb-3"><i class="bi bi-lightbulb me-2"></i>Nota Importante</h6>
+                        <p class="text-muted small mb-0" style="text-align: justify;">
+                            Aunque es una herramienta útil para evaluar riesgos relacionados con el peso, el IMC no
+                            distingue entre masa muscular y grasa corporal.
+                        </p>
+                    </div>
+
+                    <div id="mensaje" class="alert alert-success mt-4 rounded-3 shadow-sm d-none"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla de Clasificación IMC -->
+    <div class="col-12 col-lg-6">
+        <div class="h-100">
+            <div class="card shadow border-0">
+                <div class="card-body p-4">
+                    <h4 class="card-title mb-4 d-flex align-items-center">
+                        <i class="bi bi-clipboard-data me-2 text-dark"></i> Tabla de Clasificación IMC
+                    </h4>
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th scope="col">Rango</th>
+                                    <th scope="col">Categoría</th>
+                                    <th scope="col">Descripción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="badge" style="background-color: #f57948">&lt; 18.5</span></td>
+                                    <td><strong>Bajo peso</strong></td>
+                                    <td class="text-muted">Puede indicar desnutrición o problemas de salud.</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge text-white" style="background-color: #6cad6c">&nbsp;18.5 -
+                                            24.9&nbsp;</span></td>
+                                    <td><strong>Normal</strong></td>
+                                    <td class="text-muted">Rango saludable asociado con menor riesgo de enfermedades.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge text-white" style="background-color: #daad44">25 -
+                                            29.9</span></td>
+                                    <td><strong>Sobrepeso</strong></td>
+                                    <td class="text-muted">Aumenta el riesgo de enfermedades cardiovasculares y
+                                        diabetes.</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge" style="background-color: #f57948">&ge; 30 - 34.9</span></td>
+                                    <td><strong>Obesidad tipo 1</strong></td>
+                                    <td class="text-muted">Alto riesgo de enfermedades crónicas.</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge" style="background-color: #fa5210">&ge; 35 - 39.9</span></td>
+                                    <td><strong>Obesidad tipo 2</strong></td>
+                                    <td class="text-muted">Alto riesgo de enfermedades crónicas.</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge" style="background-color: #ff0c0c">&ge; 40</span></td>
+                                    <td><strong>Obesidad tipo 3</strong></td>
+                                    <td class="text-muted">Alto riesgo de enfermedades crónicas.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
