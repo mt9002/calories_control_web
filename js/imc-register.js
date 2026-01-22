@@ -3,7 +3,9 @@ function init_imc() {
     const pesoSlider = document.getElementById("pesoSlider");
     const alturaValor = document.getElementById("altura-valor");
     const pesoValor = document.getElementById("peso-valor");
-
+    
+    const API_URL = "http://localhost:8080/imc/create";
+    
     alturaSlider.addEventListener("input", () => alturaValor.textContent = alturaSlider.value);
     pesoSlider.addEventListener("input", () => pesoValor.textContent = pesoSlider.value);
 
@@ -19,7 +21,7 @@ function init_imc() {
         errorDiv.classList.add("d-none");
 
         try {
-            const response = await fetch("/imc/create", {
+            const response = await fetch(API_URL, {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: new URLSearchParams({ altura, peso })
