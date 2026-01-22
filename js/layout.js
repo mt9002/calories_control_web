@@ -20,10 +20,23 @@ async function loadView(view) {
         const html = await res.text();
         document.getElementById("app").innerHTML = html;
 
-        // hook opcional por vista
-        if (typeof window[`init_${view}`] === "function") {
-            window[`init_${view}`]();
-        }
+        // Cargar JS si existe
+        const script = document.createElement("script");
+        script.src = `js/${view}.js`;
+        script.onload = () => {
+            // hook opcional por vista
+            if (typeof window[`init_${view}`] === "function") {
+                setTimeout(() => window[`init_${view}`](), 0);
+            }
+        };
+        script.onerror = () => {
+            console.warn(`JS para ${view} no encontrado`);
+            // hook opcional por vista
+            if (typeof window[`init_${view}`] === "function") {
+                setTimeout(() => window[`init_${view}`](), 0);
+            }
+        };
+        document.head.appendChild(script);
 
     } catch (error) {
         document.getElementById("app").innerHTML =
