@@ -1,29 +1,45 @@
-function init_imc() {
+window.init_imc = function() {
     const alturaSlider = document.getElementById("alturaSlider");
     const pesoSlider = document.getElementById("pesoSlider");
     const alturaValor = document.getElementById("altura-valor");
     const pesoValor = document.getElementById("peso-valor");
-    
+    const form = document.getElementById("imc-form");
+    const tableBody = document.getElementById("tabla-imc")?.querySelector("tbody");
+    const pageSizeSelect = document.getElementById("pageSize");
+    const prevBtn = document.getElementById("prevPage");
+    const nextBtn = document.getElementById("nextPage");
+    const pageInfo = document.getElementById("pagina-info");
+    const resultadoDiv = document.getElementById("resultado");
+    const errorDiv = document.getElementById("error");
+
+    if (!alturaSlider || !pesoSlider || !form || !tableBody) {
+        console.warn("init_imc: elementos no encontrados, ¿la vista está cargada?");
+        return;
+    }
+
     const API_URL = "http://localhost:8080/imc/create";
-     
-    
-    // Actualizar badges al mover sliders
+    let registros = [];
+    let currentPage = 0;
+    let pageSize = parseInt(pageSizeSelect.value);
+
+    // =======================
+    // Sliders
+    // =======================
     alturaSlider.addEventListener("input", () => {
         alturaValor.textContent = alturaSlider.value;
     });
-
     pesoSlider.addEventListener("input", () => {
         pesoValor.textContent = pesoSlider.value;
     });
 
-    const form = document.getElementById("imc-form");
+    // =======================
+    // Formulario
+    // =======================
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
         const altura = parseFloat(alturaSlider.value);
         const peso = parseFloat(pesoSlider.value);
 
-        const resultadoDiv = document.getElementById("resultado");
-        const errorDiv = document.getElementById("error");
         resultadoDiv.classList.add("d-none");
         errorDiv.classList.add("d-none");
 
@@ -35,14 +51,11 @@ function init_imc() {
             });
 
             if (!response.ok) throw new Error("Error al calcular IMC");
-
             const data = await response.json();
 
-            // Mostrar resultado
             resultadoDiv.textContent = `Tu IMC es ${data.imc} (${data.categoria})`;
             resultadoDiv.classList.remove("d-none");
 
-            // Actualizar tabla
             addRow({
                 userName: data.userName || "Usuario",
                 peso: data.peso,
@@ -59,22 +72,13 @@ function init_imc() {
         }
     });
 
-    // Tabla e historial
-    const tableBody = document.getElementById("tabla-imc").querySelector("tbody");
-    let registros = [];
-
+    // =======================
+    // Tabla
+    // =======================
     function addRow(registro) {
         registros.push(registro);
         renderTable();
     }
-
-    // Paginación
-    const pageSizeSelect = document.getElementById("pageSize");
-    const prevBtn = document.getElementById("prevPage");
-    const nextBtn = document.getElementById("nextPage");
-    const pageInfo = document.getElementById("pagina-info");
-    let currentPage = 0;
-    let pageSize = parseInt(pageSizeSelect.value);
 
     function renderTable() {
         tableBody.innerHTML = "";
@@ -100,6 +104,9 @@ function init_imc() {
         pageInfo.textContent = `Página ${currentPage + 1} de ${Math.ceil(registros.length / pageSize)}`;
     }
 
+    // =======================
+    // Paginación
+    // =======================
     pageSizeSelect.addEventListener("change", () => {
         pageSize = parseInt(pageSizeSelect.value);
         currentPage = 0;
@@ -113,4 +120,4 @@ function init_imc() {
     nextBtn.addEventListener("click", () => {
         if ((currentPage + 1) * pageSize < registros.length) { currentPage++; renderTable(); }
     });
-}
+};
