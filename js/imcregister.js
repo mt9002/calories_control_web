@@ -56,17 +56,18 @@ function init_imcregister() {
 
             if (!response.ok) throw new Error("Error al calcular IMC");
             const data = await response.json();
+            console.log('Response data:', data);
 
-            resultadoDiv.textContent = `Tu IMC es ${data.imc} (${data.categoria})`;
+            resultadoDiv.textContent = `Tu IMC es ${data.imcValue} (${data.categories})`;
             resultadoDiv.classList.remove("d-none");
 
             addRow({
-                userName: data.userName || "Usuario",
-                peso: data.peso,
-                altura: data.altura,
-                resultado: data.imc,
-                clasificacion: data.categoria,
-                fechaRegistro: data.fechaRegistro
+                userName: "Usuario",
+                peso: peso,
+                altura: altura / 100,
+                resultado: data.imcValue,
+                clasificacion: data.categories,
+                fechaRegistro: new Date().toISOString()
             });
 
         } catch (err) {
