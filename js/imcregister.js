@@ -3,7 +3,7 @@ function init_imcregister() {
     const pesoSlider = document.getElementById("pesoSlider");
     const alturaValor = document.getElementById("altura-valor");
     const pesoValor = document.getElementById("peso-valor");
-    const form = document.getElementById("imc-form");
+    const form = document.getElementById("imcForm");
     const tableBody = document.getElementById("tabla-imc")?.querySelector("tbody");
     const pageSizeSelect = document.getElementById("pageSize");
     const prevBtn = document.getElementById("prevPage");
