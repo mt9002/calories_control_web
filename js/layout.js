@@ -21,7 +21,7 @@ async function loadView(view) {
         document.getElementById("app").innerHTML = html;
 
         // hook opcional por vista
-        if (typeof window[`init_${view}`] === "function") {
+        if (typeof window[`init_${view.replace('_')}`] === "function") {
             window[`init_${view}`]();
         }
 
