@@ -1,4 +1,4 @@
-function init_imcregister(){
+function init_imcregister() {
     const alturaSlider = document.getElementById("alturaSlider");
     const pesoSlider = document.getElementById("pesoSlider");
     const alturaValor = document.getElementById("altura-valor");
@@ -11,8 +11,12 @@ function init_imcregister(){
     const pageInfo = document.getElementById("pagina-info");
     const resultadoDiv = document.getElementById("resultado");
     const errorDiv = document.getElementById("error");
-    
+
     if (!alturaSlider || !pesoSlider) return;
+
+    // Sincronizar valores iniciales
+    alturaValor.textContent = alturaSlider.value;
+    pesoValor.textContent = pesoSlider.value;
 
     alturaSlider.addEventListener("input", () => {
         alturaValor.textContent = alturaSlider.value;
@@ -20,7 +24,7 @@ function init_imcregister(){
     pesoSlider.addEventListener("input", () => {
         pesoValor.textContent = pesoSlider.value;
     });
-    
+
     if (!alturaSlider || !pesoSlider || !form || !tableBody) {
         console.warn("init_imc: elementos no encontrados, ¿la vista está cargada?");
         return;
@@ -35,7 +39,7 @@ function init_imcregister(){
     // =======================
     // Formulario
     // =======================
-   document.getElementById("imcForm").addEventListener("submit", async (e) =>{
+    document.getElementById("imcForm").addEventListener("submit", async (e) => {
         e.preventDefault();
         const altura = parseFloat(alturaSlider.value);
         const peso = parseFloat(pesoSlider.value);
