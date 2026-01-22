@@ -1,4 +1,4 @@
-function init_imc_register(){
+function init_imcregister(){
     const alturaSlider = document.getElementById("alturaSlider");
     const pesoSlider = document.getElementById("pesoSlider");
     const alturaValor = document.getElementById("altura-valor");
